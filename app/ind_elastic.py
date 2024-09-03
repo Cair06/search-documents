@@ -2,7 +2,7 @@ import asyncio
 from sqlalchemy.future import select
 from .database import async_session_maker
 from .models import Document
-from .elasticsearch_my import get_elasticsearch
+from .elastic import get_elasticsearch
 
 
 async def index_documents():
