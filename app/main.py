@@ -4,7 +4,6 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
 
 from fastapi import Depends, FastAPI, HTTPException
-from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from app.database import async_session_maker
 from app.models import Document

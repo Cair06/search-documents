@@ -5,9 +5,9 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from app.database import Base  # импортируем Base из вашего проекта
-from app.models import Document  # импортируем вашу модель Document
-from app.config import settings  # импорт конфигураций
+from app.database import Base
+from app.models import Document  # do not remove
+from app.config import settings
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

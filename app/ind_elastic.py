@@ -7,7 +7,6 @@ from .elastic import get_elasticsearch
 from .database import async_session_maker
 from .models import Document
 
-# Отключаем предупреждения Elasticsearch
 warnings.filterwarnings("ignore", category=ElasticsearchWarning)
 
 
@@ -29,7 +28,7 @@ async def index_documents():
                         "created_date": str(document.created_date),
                     }
                     await es.index(index="documents", id=document.id, document=doc_body)
-                    pbar.update(1)  # Обновляем прогресс-бар на один шаг
+                    pbar.update(1)
 
         print("\nIndexing completed!")
 

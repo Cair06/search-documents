@@ -20,10 +20,7 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-    # Удаляем существующий индекс на столбце text
     op.drop_index("ix_documents_text", table_name="documents")
-
-    # Изменяем тип столбца text
     op.alter_column(
         "documents",
         "text",
@@ -31,8 +28,6 @@ def upgrade() -> None:
         type_=sa.Text(),
         existing_nullable=False,
     )
-
-    # Добавляем столбец vector с вычисляемым значением
     op.add_column(
         "documents",
         sa.Column(
@@ -42,8 +37,6 @@ def upgrade() -> None:
             nullable=False,
         ),
     )
-
-    # Добавляем индекс для search_vector
     op.create_index(
         "ix_documents_search", "documents", ["search_vector"], postgresql_using="gin"
     )

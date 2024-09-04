@@ -1,6 +1,5 @@
 from elasticsearch import AsyncElasticsearch
 from contextlib import asynccontextmanager
-from app.config import settings
 
 
 @asynccontextmanager
