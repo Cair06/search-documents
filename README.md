@@ -41,7 +41,7 @@ docker exec -it fastapi_app bash -c "python -m app.ind_elastic"
 
 ### Шаг 5:
 
-Запуск и проверка тестов
+Запуск и проверка тестов, в случае ошибки запустить еще раз.
 ```bash
 docker exec -it fastapi_app bash -c "pytest -p no:warnings"
 ```
