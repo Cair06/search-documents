@@ -39,6 +39,14 @@ async def search_documents(query: str):
 
 @app.delete("/documents/{document_id}/")
 async def delete_document(document_id: int):
+    async with get_elasticsearch() as es:
+        try:
+            await es.delete(index="documents", id=document_id)
+        except Exception:
+            raise HTTPException(
+                status_code=500, detail="Failed to delete from Elasticsearch"
+            )
+
     async with async_session_maker() as session:
         stmt = select(Document).where(Document.id == document_id)
         result = await session.execute(stmt)
@@ -50,10 +58,7 @@ async def delete_document(document_id: int):
         await session.delete(document)
         await session.commit()
 
-        async with get_elasticsearch() as es:
-            await es.delete(index="documents", id=document_id)
-
-        return {"status": "deleted"}
+    return {"status": "deleted"}
 
 
 if __name__ == "__main__":
